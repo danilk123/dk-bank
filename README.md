@@ -26,10 +26,12 @@ http://localhost:8080/api/transactions?account=2002
 
 ### Implementation notes
 
-The application is implemented as simple SpringBoot app
-The model classes Account and Transaction linked to H2 DB using JPA persistence.
-Rest controller is mapped using spring.
-initial data populated by the script in data.sql
+* The application is implemented as simple SpringBoot app
+* The model classes Account and Transaction linked to H2 DB using JPA persistence.
+* Rest controller is mapped using spring.
+* Initial data populated by the script in data.sql
+* Lombok library is used to generated som boiler plate code as getters and setters, log declaration, etc.
+* Mockito and JUnit4 is used for unit testing
 
 ### Author
 
