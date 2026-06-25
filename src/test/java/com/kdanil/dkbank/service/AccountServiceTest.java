@@ -2,21 +2,21 @@ package com.kdanil.dkbank.service;
 
 import com.kdanil.dkbank.model.Account;
 import com.kdanil.dkbank.persistance.AccountRepository;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.data.rest.webmvc.ResourceNotFoundException;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.util.Optional;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 @SpringBootTest
-@RunWith(SpringRunner.class)
+@ExtendWith(SpringExtension.class)
 public class AccountServiceTest {
 
     @MockBean
@@ -25,10 +25,8 @@ public class AccountServiceTest {
     @Autowired
     private AccountService accountService;
 
-
     @Test
     public void getAccount() {
-
         String accountNumber = "123";
 
         Account account = new Account();
@@ -41,15 +39,11 @@ public class AccountServiceTest {
         assertEquals(account, result);
     }
 
-
-    @Test(expected = ResourceNotFoundException.class)
+    @Test
     public void getAccountNotFound() {
-
         when(accountRepository.findById(anyString())).thenReturn(Optional.empty());
 
-        accountService.getAccount("123");
-
-        fail("Mast throw an exception");
+        assertThrows(ResourceNotFoundException.class, () -> accountService.getAccount("123"));
     }
 
     @Test
